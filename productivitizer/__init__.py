@@ -23,4 +23,16 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+
+    # Importing the init app function from db.py
+    """
+    After importing we can call the init-db command,
+    $ flask --app productivitizer init-db
+
+    """
+
+    from . import db
+    db.init_app(app)
+
+
     return app
