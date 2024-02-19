@@ -30,9 +30,12 @@ def create_app(test_config=None):
     $ flask --app productivitizer init-db
 
     """
-
     from . import db
     db.init_app(app)
 
+
+    # Importing auth blueprint
+    from . import auth
+    app.register_blueprint
 
     return app
