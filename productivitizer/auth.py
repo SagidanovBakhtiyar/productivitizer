@@ -17,7 +17,7 @@ from productivitizer.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-# Implementing the register function
+# Implement the register function
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -55,17 +55,86 @@ def register():
                 ).fetchone()
 
 
-                # Login the user after register and redirect tot the index page
+                # Login the user after register
                 session.clear()
                 session['user_id'] = user['id']
 
 
-                # Redirect the user to homepage
-                return redirect('/')
-
             except db.IntegrityError:
                 error = f"User {username} is already registred."
         
+
+        # Redirect user to index page
+        if error is None:
+            return redirect(url_for('index'))
+        
+
         flash(error)
     
     return render_template('auth/register.html')
+
+
+# Implement login function
+@bp.route("/login", methods=('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+
+        # Storing the data from login form (same as register)
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        
+
+        # Taking user data from database
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+
+        # User validation
+        if user is None or not check_password_hash(user['password'], password):
+            error = 'Incorrect username or password'
+        
+
+        # Return user to index page
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('index'))
+        
+        flash(error)
+    
+    return render_template('auth/login.html')
+
+
+# Load the user from session
+@bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
+
+
+# Logout implementation
+@bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
+# Check user login
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+        
+        return view(**kwargs)
+    
+    return wrapped_view
