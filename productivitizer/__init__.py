@@ -40,7 +40,7 @@ def create_app(test_config=None):
 
 
     # Importing pomodoro blueprint
-    # from . import pomodoro
-    # app.register_blueprint(pomodoro.bp)
+    from . import pomodoro
+    app.register_blueprint(pomodoro.bp)
 
     return app
