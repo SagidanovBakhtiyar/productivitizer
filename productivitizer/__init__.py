@@ -36,6 +36,11 @@ def create_app(test_config=None):
 
     # Importing auth blueprint
     from . import auth
-    app.register_blueprint
+    app.register_blueprint(auth.bp)
+
+
+    # Importing pomodoro blueprint
+    # from . import pomodoro
+    # app.register_blueprint(pomodoro.bp)
 
     return app
