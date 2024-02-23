@@ -5,14 +5,14 @@
 /* Pomodoro CSS */
 
 /* Timer Display */
-.display {
+.timer-display {
     text-align: center;
-    margin-top: 50px; /* Adjust as needed */
+    margin-top: 50px; 
 }
 
-.display h1 {
-    font-size: 100px; /* Adjust size as needed */
-    margin: 0; /* Remove default margin */
+.timer-display .timer {
+    font-size: 150px; 
+    margin: 0; 
 }
 
 /* Center the buttons */
@@ -21,34 +21,34 @@
 }
 
 /* Start and Stop Buttons */
-.start, .stop {
-    display: inline-block; /* Display buttons in one line */
-    margin-right: 10px; /* Add spacing between buttons */
+.start-button, .stop-button {
+    display: inline-block; 
+    margin-right: 10px;
 }
 
-.start button, .stop button {
-    font-size: 20px; /* Adjust size as needed */
-    padding: 10px 20px; /* Adjust padding as needed */
+.start-button button, .stop-button button {
+    font-size: 20px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.start button {
-    background-color: #4CAF50; /* Green */
+.start-button button {
+    background-color: #4CAF50;
     color: white;
 }
 
-.start button:hover {
-    background-color: #45a049; /* Darker green */
+.start-button button:hover {
+    background-color: #45a049;
 }
 
-.stop button {
-    background-color: #f44336; /* Red */
+.stop-button button {
+    background-color: #f44336;
     color: white;
 }
 
-.stop button:hover {
-    background-color: #d32f2f; /* Darker red */
+.stop-button button:hover {
+    background-color: #d32f2f;
 }
