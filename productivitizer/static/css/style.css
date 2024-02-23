@@ -1,4 +1,54 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
-    
+
+/* Pomodoro CSS */
+
+/* Timer Display */
+.display {
+    text-align: center;
+    margin-top: 50px; /* Adjust as needed */
+}
+
+.display h1 {
+    font-size: 100px; /* Adjust size as needed */
+    margin: 0; /* Remove default margin */
+}
+
+/* Center the buttons */
+.button-container {
+    text-align: center;
+}
+
+/* Start and Stop Buttons */
+.start, .stop {
+    display: inline-block; /* Display buttons in one line */
+    margin-right: 10px; /* Add spacing between buttons */
+}
+
+.start button, .stop button {
+    font-size: 20px; /* Adjust size as needed */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.start button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.stop button {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.stop button:hover {
+    background-color: #d32f2f; /* Darker red */
+}

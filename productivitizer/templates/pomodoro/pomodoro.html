@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {% block header %}Pomodoro timer{% endblock %}
+    Pomodoro
 {% endblock %}
 
 {% block main %}
+    <div class="display">
+        <h1>25:00</h1>
+    </div>
+    <div class="button-container">
+        <div class="start">
+            <button type="submit" class="btn btn-success">Start</button>
+        </div>
+        <div class="stop">
+            <button type="submit" class="btn btn-danger">Stop</button>
+        </div>
+    </div>
     <script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
 {% endblock %}
