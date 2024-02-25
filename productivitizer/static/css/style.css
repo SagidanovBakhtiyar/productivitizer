@@ -2,53 +2,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Pomodoro CSS */
+/* Base css */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-/* Timer Display */
-.timer-display {
+.wrapper {
+    flex: 1;
+}
+
+footer {
     text-align: center;
-    margin-top: 50px; 
-}
-
-.timer-display .timer {
-    font-size: 150px; 
-    margin: 0; 
-}
-
-/* Center the buttons */
-.button-container {
-    text-align: center;
-}
-
-/* Start and Stop Buttons */
-.start-button, .stop-button {
-    display: inline-block; 
-    margin-right: 10px;
-}
-
-.start-button button, .stop-button button {
-    font-size: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.start-button button {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.start-button button:hover {
-    background-color: #45a049;
-}
-
-.stop-button button {
-    background-color: #f44336;
-    color: white;
-}
-
-.stop-button button:hover {
-    background-color: #d32f2f;
 }

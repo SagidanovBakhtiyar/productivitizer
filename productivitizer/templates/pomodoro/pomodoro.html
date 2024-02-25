@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pomodoro.css') }}">
+{% endblock %}
+
 {% block title %}
     Pomodoro
 {% endblock %}
 
 {% block main %}
-    <div class="timer-display">
-        <span class="timer">25:00</span>
-    </div>
-    <div class="interval-container">
-        <span class="interval"></span>
-    </div>
-    <div class="button-container">
-        <div class="start-button">
-            <button type="button" class="btn btn-success">Start</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div id="modes">
+                <button class="btn btn-primary" data-mode-id="pomodoro">Pomodoro</button>
+                <button class="btn btn-secondary" data-mode-id="short">Short Break</button>
+                <button class="btn btn-secondary" data-mode-id="long">Long Break</button>
+            </div>
+            <div id="timer">25:00</div>
+            <div id="controls">
+                <button onclick="startTimer()" class="btn btn-success timer-control start">Start</button>
+                <button onclick="pauseTimer()" class="btn btn-danger timer-control pause">Pause</button>
+                <button onclick="nextMode()" class="btn btn-primary timer-control skip">Skip</button>
+            </div>
         </div>
-        <div class="stop-button">
-            <button type="button" class="btn btn-danger">Stop</button>
-        </div>
     </div>
-    <script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
+</div>
 {% endblock %}

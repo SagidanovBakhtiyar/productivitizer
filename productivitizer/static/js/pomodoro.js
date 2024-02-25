@@ -1,50 +1,108 @@
-// Pomodoro functionality
+// Declaring global variable
+var time = 25 * 60;
+var timerInterval;
+var currentMode = "pomodoro";
+var MODES = {
+    pomodoro: 25,
+    short: 5,
+    long: 15,
+}
+var totalBreaks = 0;
+
+// Pomodoro modes 
+document.querySelectorAll("#modes button")
+    .forEach(button => {
+        button.addEventListener('click', handleModeButtons)
+    });
 
 
-// Set variables
-let timerDisplay = document.querySelector('.timer');
-let startButton = document.querySelector('.start-button');
-let stopButton = document.querySelector('.stop-button');
+function handleModeButtons(event) {
+    switchMode(event.target.dataset.modeId);
+}
 
-
-// 
-
-let PomodoroTimer = {
-    // Set variables
-    timeLeft: 25 * 60,
-    session: 0,
-    intervalId: null,
-
-    // Updating the display
-    updateTimer: function() {
-        if (this.timeLeft === 0){
-            this.session++;
-            // Long break
-            if (this.session === 4) {
-                this.timeLeft = 15 * 60;
-                this.session = 0;
-            } else {
-                this.timeLeft = 5 * 60;
-            }
-        } else {
-            this.timeLeft--;
-            let minutes =  Math.floor(this.timeLeft / 60);
-            let seconds = this.timeLeft % 60;
-            timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-    },
-
-    // Start timer
-    startTimer: function() {
-        this.intervalId = setInterval(this.updateTimer.bind(this), 1000);
-    },
-
-    // Stop timer
-    stopTimer: function() {
-        clearInterval(this.intervalId);
+function updateControlButtons(isrunning) {
+    var start_button = document.querySelector(".timer-control.start");
+    var pause_button = document.querySelector(".timer-control.pause");
+    
+    if(isrunning) {
+        start_button.disabled = true;
+        pause_button.disabled = false;
+    } else {
+        start_button.disabled = false;
+        pause_button.disabled = true;
     }
 }
 
+function updateButtonStyles() {
+    // Remove active class from all buttons
+    document.querySelectorAll("#modes button").forEach(button => {
+        button.classList.remove('active');
+    });
+    // Add active class to the button corresponding to the current mode
+    document.querySelector(`#modes button[data-mode-id="${currentMode}"]`).classList.add('active');
+}
 
-startButton.addEventListener('click', () => PomodoroTimer.startTimer());
-stopButton.addEventListener('click', () => PomodoroTimer.stopTimer());
+function switchMode(mode) {
+    currentMode = mode;
+    resetTimer();
+    updateButtonStyles()
+}
+
+// Start timer takes updateTimer function and execute it every second
+function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+    updateControlButtons(true);
+}
+
+
+// Stup the timer
+function pauseTimer() {
+    clearInterval(timerInterval);
+    updateControlButtons(false);
+}
+
+
+// updateTimer function decriments and prints time to console
+function updateTimer() {
+    var minutes = Math.floor(time / 60);
+    var seconds = time % 60;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    document.getElementById("timer").textContent = minutes + ":" + seconds;
+
+    if(time <= 0) {
+        pauseTimer();
+        alert("Time's up!");
+        nextMode();
+        resetTimer();
+    }
+    time -= 1;
+}
+
+
+// Next mode function implementation
+function nextMode() {
+    if(currentMode == "pomodoro") {
+        totalBreaks += 1;
+        if(totalBreaks % 4 == 0) {
+            switchMode("long");
+        } else {
+            switchMode("short");
+        }
+    } else {
+        switchMode("pomodoro")
+    }
+}
+
+function resetTimer() {
+    time = MODES[currentMode] * 60;
+    clearInterval(timerInterval);
+    updateTimer();
+    updateControlButtons(false);
+}
+
+
+
+

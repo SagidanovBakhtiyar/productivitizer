@@ -1,0 +1,34 @@
+#modes {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#timer {
+    font-size: 140px;
+    text-align: center;
+    user-select: none;
+    margin-bottom: 20px;
+}
+
+#controls {
+    text-align: center;
+}
+
+.timer-control {
+    margin-right: 10px;
+}
+
+.start {
+    background-color: #28a745; 
+    border-color: #28a745;
+}
+
+.pause {
+    background-color: #dc3545; 
+    border-color: #dc3545;
+}
+
+.skip {
+    background-color: #007bff;
+    border-color: #007bff;
+}
