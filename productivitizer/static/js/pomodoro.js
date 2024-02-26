@@ -7,7 +7,14 @@ var MODES = {
     short: 5,
     long: 15,
 }
+const DEFAULT_MODES = {
+    pomodoro: 25,
+    short: 5,
+    long: 15,
+}
 var totalBreaks = 0;
+const alarmSound = new Audio('/static/alarm.mp3');
+
 
 // Pomodoro modes 
 document.querySelectorAll("#modes button")
@@ -15,6 +22,28 @@ document.querySelectorAll("#modes button")
         button.addEventListener('click', handleModeButtons)
     });
 
+
+// Custom duration control
+document.querySelectorAll("#duration-control input")
+    .forEach(function(input) {
+        input.addEventListener('change', durationControlHandler);
+        input.value = '';
+    })
+
+function durationControlHandler(event) {
+    // trim deletes spaces between numbers
+    var value = event.target.value.trim(); 
+    var durationId = event.target.dataset.durationId;
+
+    // Custom duration validation
+    if(value != '' && !isNaN(value) && Number.isInteger(parseFloat(value)) && parseInt(value) != 0) {
+        MODES[durationId] = parseInt(value);
+    } else {
+        MODES[durationId] = DEFAULT_MODES[durationId];
+    }
+
+    resetTimer();
+}
 
 function handleModeButtons(event) {
     switchMode(event.target.dataset.modeId);
@@ -71,10 +100,14 @@ function updateTimer() {
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     document.getElementById("timer").textContent = minutes + ":" + seconds;
+    document.title = `${minutes}:${seconds} - Pomodoro`
 
     if(time <= 0) {
         pauseTimer();
+        alarmSound.play();
         alert("Time's up!");
+        alarmSound.pause();
+        alarmSound.currentTime = 0;
         nextMode();
         resetTimer();
     }

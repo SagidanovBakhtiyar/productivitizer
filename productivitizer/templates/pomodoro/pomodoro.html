@@ -26,4 +26,24 @@
         </div>
     </div>
 </div>
+<div id="duration-control" class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="pomodoro-duration">Work Time:</label>
+            <input type="number" id="pomodoro-duration" placeholder="Pomodoro Duration" class="form-control duration" data-duration-id="pomodoro">
+        </div>
+        <div class="col-md-4">
+            <label for="short-break">Short Break:</label>
+            <input type="number" id="short-break" placeholder="Short Break Duration" class="form-control duration" data-duration-id="short">
+        </div>
+        <div class="col-md-4">
+            <label for="long-break">Long Break:</label>
+            <input type="number" id="long-break" placeholder="Long Break Duration" class="form-control duration" data-duration-id="long">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/pomodoro.js') }}"></script>
 {% endblock %}

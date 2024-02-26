@@ -32,3 +32,15 @@
     background-color: #007bff;
     border-color: #007bff;
 }
+
+#duration-control {
+    margin-top: 20px;
+}
+
+#duration-control label {
+    font-weight: bold;
+}
+
+.duration {
+    margin-bottom: 10px;
+}
