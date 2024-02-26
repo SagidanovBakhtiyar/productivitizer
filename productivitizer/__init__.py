@@ -43,4 +43,10 @@ def create_app(test_config=None):
     from . import pomodoro
     app.register_blueprint(pomodoro.bp)
 
+
+    # Importing homepage blueprint
+    from . import homepage
+    app.register_blueprint(homepage.bp)
+    app.add_url_rule('/', endpoint='index')
+
     return app

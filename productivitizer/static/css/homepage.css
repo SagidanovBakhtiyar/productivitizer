@@ -1,0 +1,17 @@
+    /* Add this CSS to your style.css file */
+    .homepage-navigation {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px; /* Adjust margin as needed */
+    }
+
+.homepage-auth {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.btn-primary {
+    margin: 0 5px; /* Add spacing between buttons */
+}
+
