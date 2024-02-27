@@ -1,5 +1,6 @@
 #modes {
     text-align: center;
+    margin-top: 100px;
     margin-bottom: 20px;
 }
 
@@ -34,7 +35,7 @@
 }
 
 #duration-control {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 #duration-control label {

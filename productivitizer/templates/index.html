@@ -11,30 +11,11 @@
     <title>Productivitizer</title>
 </head>
 <body>
-    <div class="homepage-auth">
-        {% if g.user %}
-        <a>{{ g.user['username'] }}</a>
-        <a class="btn btn-primary" href="{{ url_for('auth.logout') }}">Log Out</a>
-        {% else %}
-        <a class="btn btn-primary" href="{{ url_for('auth.register') }}">Register</a>
-        <a class="btn btn-primary" href="{{ url_for('auth.login') }}">Login</a>
-        {% endif %}
-    </div>
     <div class="homepage-navigation">
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-primary">Pomodoro</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-primary">Kanban</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-primary">Finance</button>
-            </div>
+        <div class="d-grid">
+            <a class="custom" href="{{ url_for('pomodoro.pomodoro') }}">Pomodoro</a>
+            <a class="custom">Kanban</a>
+            <a class="custom">Finance</a>
         </div>
     </div>
 </body>

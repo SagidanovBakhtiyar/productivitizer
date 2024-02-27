@@ -36,7 +36,7 @@ function durationControlHandler(event) {
     var durationId = event.target.dataset.durationId;
 
     // Custom duration validation
-    if(value != '' && !isNaN(value) && Number.isInteger(parseFloat(value)) && parseInt(value) != 0) {
+    if (value != '' && !isNaN(value) && Number.isInteger(parseFloat(value)) && parseInt(value) >= 0 && parseInt(value) != 0) {
         MODES[durationId] = parseInt(value);
     } else {
         MODES[durationId] = DEFAULT_MODES[durationId];
