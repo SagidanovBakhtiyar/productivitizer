@@ -30,8 +30,15 @@ def create_app(test_config=None):
     $ flask --app productivitizer init-db
 
     """
+    # Importing database blueprint
     from . import db
     db.init_app(app)
+
+
+    # Importing homepage blueprint
+    from . import homepage
+    app.register_blueprint(homepage.bp)
+    app.add_url_rule('/', endpoint='index')
 
 
     # Importing auth blueprint
@@ -44,9 +51,8 @@ def create_app(test_config=None):
     app.register_blueprint(pomodoro.bp)
 
 
-    # Importing homepage blueprint
-    from . import homepage
-    app.register_blueprint(homepage.bp)
-    app.add_url_rule('/', endpoint='index')
+    # Import kanban blueprint
+    from . import kanban
+    app.register_blueprint(kanban.bp)
 
     return app

@@ -1,8 +1,4 @@
-from flask import (
-    Blueprint,
-    redirect,
-    render_template,
-)
+from flask import Blueprint, render_template
 
 bp = Blueprint('homepage', __name__)
 
