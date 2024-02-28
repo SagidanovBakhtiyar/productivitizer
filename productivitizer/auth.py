@@ -34,7 +34,7 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
-        elif len(str(password)) <= 8:
+        elif len(str(password)) < 8:
             error = 'Password length must be at least 8 characters.'
 
         

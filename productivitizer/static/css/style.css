@@ -29,3 +29,7 @@ footer {
     margin-bottom: 20px;
     font-size: 20px;
 }
+
+.navbar {
+    user-select: none;
+}

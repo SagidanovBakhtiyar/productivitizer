@@ -9,6 +9,74 @@
 {% endblock %}
 
 {% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Todo</div>
+                <div class="card-body">
+                    <!-- Tasks in Todo column -->
+                    {% for task in tasks %}
+                    {% if task.task_status == 'todo' %}
+                    <div class="task card mb-3">
+                        <div class="card-body">
+                            <p>Task: {{ task.task_title }}</p>
+                            {% if task.task_description %}
+                            <p>Description: {{ task.task_description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Repeat similar structure for Doing and Done columns -->
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-warning">Doing</div>
+                <div class="card-body">
+                    <!-- Tasks in Doing column -->
+                    {% for task in tasks %}
+                    {% if task.task_status == 'doing' %}
+                    <div class="task card mb-3">
+                        <div class="card-body">
+                            <p>Task: {{ task.task_title }}</p>
+                            {% if task.task_description %}
+                            <p>Description: {{ task.task_description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-success text-white">Done</div>
+                <div class="card-body">
+                    <!-- Tasks in Done column -->
+                    {% for task in tasks %}
+                    {% if task.task_status == 'done' %}
+                    <div class="task card mb-3">
+                        <div class="card-body">
+                            <p>Task: {{ task.task_title }}</p>
+                            {% if task.task_description %}
+                            <p>Description: {{ task.task_description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block script %}

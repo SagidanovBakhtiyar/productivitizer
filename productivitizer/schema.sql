@@ -17,7 +17,7 @@ CREATE TABLE kanban (
     user_id INTEGER NOT NULL,
     task_title TEXT NOT NULL,
     task_description TEXT,
-    task_status TEXT DEFAULT 'todo', -- 'todo', 'in_progress', 'done'
+    task_status TEXT DEFAULT 'todo', -- 'todo', 'doing', 'done'
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
