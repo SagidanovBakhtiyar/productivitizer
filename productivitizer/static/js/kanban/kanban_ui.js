@@ -41,3 +41,6 @@ function updateUITasks(tasks) {
 
 // Schedule fetching tasks at regular intervals (e.g., every 5 seconds)
 setInterval(fetchAndRenderTasks, 5000); 
+
+
+// create task ui
