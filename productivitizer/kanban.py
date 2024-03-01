@@ -14,6 +14,12 @@ delete_task - DELETE,
 
 """
 
+# Endpoint for webpage view
+@bp.route("/kanban")
+@login_required
+def kanban():
+    return render_template("kanban/kanban.html")
+
 
 # Endpoint for creating the task
 @bp.route("/kanban/create", methods=["POST"])
@@ -41,8 +47,8 @@ def create_task():
     return jsonify({"message": "Task created successfully"}), 201
 
 
-# Endpoint for webpage view
-@bp.route("/kanban", methods=["GET"])
+# Endpoint to fetch user tasks
+@bp.route("/kanban/read", methods=["GET"])
 @login_required
 def read_task():
 
@@ -53,7 +59,24 @@ def read_task():
         "SELECT * FROM kanban WHERE user_id = ?", (g.user["id"],)
     ).fetchall()
 
-    return render_template("kanban/kanban.html", tasks=tasks)
+    # Validate empty task list
+    if not tasks:
+        return jsonify([])
+
+    # Converting the tasks into list of dictionaries
+    task_list = []
+    for task in tasks:
+        task_dict = {
+            "id": task["id"],
+            "task_title": task["task_title"],
+            "task_description": task["task_description"],
+            "task_status": task["task_status"]
+        }
+        task_list.append(task_dict)
+    
+    return jsonify(task_list)
+
+
 
 
 # Endpoint for update selected task
