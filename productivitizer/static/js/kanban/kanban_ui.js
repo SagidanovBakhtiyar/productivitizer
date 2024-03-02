@@ -45,6 +45,7 @@ function updateUITasks(tasks) {
 // setInterval(fetchAndRenderTasks, 10000); 
 
 
+// Create task buttons ui
 // ToDo create task
 document.addEventListener('DOMContentLoaded', () => {
     const formTodo = document.getElementById('taskFormTodo');
