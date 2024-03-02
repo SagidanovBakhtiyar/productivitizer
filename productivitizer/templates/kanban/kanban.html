@@ -23,16 +23,16 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                       + Add task
                     </button>
-                    <form class="dropdown-menu p-3">
+                    <form id="taskFormTodo" class="dropdown-menu p-3" data-status="todo">
                       <div class="mb-2">
-                        <input type="text" class="form-control" id="taskTitle" placeholder="Task Title">
+                        <input type="text" class="form-control" id="taskTitleTodo" placeholder="Task Title">
                       </div>
                       <div class="mb-2">
-                        <input type="text" class="form-control" id="taskDescription" placeholder="Description">
+                        <input type="text" class="form-control" id="taskDescriptionTodo" placeholder="Description">
                       </div>
                       <button type="submit" class="btn btn-primary">Create task</button>
                     </form>
-                  </div>
+                </div>
             </div>
         </div>
 
@@ -43,8 +43,19 @@
                 <div class="card-body" id="taskDoing">
                     <!-- Doing tasks -->
                 </div>
-                <div class="card-body mx-auto" id="addTaskToDo">
-                    <button class="btn btn-primary">+ Add Task</button>
+                <div class="card-body dropdown mx-auto">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                      + Add task
+                    </button>
+                    <form id="taskFormDoing" class="dropdown-menu p-3" data-status="doing">
+                      <div class="mb-2">
+                        <input type="text" class="form-control" id="taskTitleDoing" placeholder="Task Title">
+                      </div>
+                      <div class="mb-2">
+                        <input type="text" class="form-control" id="taskDescriptionDoing" placeholder="Description">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Create task</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -56,8 +67,19 @@
                 <div class="card-body" id="taskDone">
                     <!-- Done tasks -->
                 </div>
-                <div class="card-body mx-auto" id="addTaskToDo">
-                    <button class="btn btn-primary">+ Add Task</button>
+                <div class="card-body dropdown mx-auto">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                      + Add task
+                    </button>
+                    <form id="taskFormDone" class="dropdown-menu p-3" data-status="done">
+                      <div class="mb-2">
+                        <input type="text" class="form-control" id="taskTitleDone" placeholder="Task Title">
+                      </div>
+                      <div class="mb-2">
+                        <input type="text" class="form-control" id="taskDescriptionDone" placeholder="Description">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Create task</button>
+                    </form>
                 </div>
             </div>
         </div>

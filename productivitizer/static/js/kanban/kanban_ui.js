@@ -39,8 +39,86 @@ function updateUITasks(tasks) {
     });
 }
 
-// Schedule fetching tasks at regular intervals (e.g., every 5 seconds)
-setInterval(fetchAndRenderTasks, 5000); 
+
+// Deprecated.
+// Schedule fetching tasks at regular intervals (e.g., every 10 seconds)
+// setInterval(fetchAndRenderTasks, 10000); 
 
 
-// create task ui
+// ToDo create task
+document.addEventListener('DOMContentLoaded', () => {
+    const formTodo = document.getElementById('taskFormTodo');
+
+    formTodo.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const taskTitle = document.getElementById('taskTitleTodo').value;
+        const taskDescription = document.getElementById('taskDescriptionTodo').value;
+        const taskStatus = formTodo.dataset.status;
+
+        try {
+
+            const createdTask = await createTask(taskTitle, taskDescription, taskStatus);
+            document.getElementById('taskTitleTodo').value = '';
+            document.getElementById('taskDescriptionTodo').value = '';
+
+            // Fetch the created tasks
+            fetchAndRenderTasks();
+            console.log('Task created');
+
+        } catch (error) {
+            console.error('Error creating task:', error.message);
+        }
+    });
+});
+
+
+// Doing create task
+document.addEventListener('DOMContentLoaded', () => {
+    const formDoing = document.getElementById('taskFormDoing');
+
+    formDoing.addEventListener('submit', async (event) => {
+        event.preventDefault();     
+
+        const taskTitle = document.getElementById('taskTitleDoing').value;
+        const taskDescription = document.getElementById('taskDescriptionDoing').value;
+        const taskStatus = formDoing.dataset.status;
+
+        try {
+            const createdTask = await createTask(taskTitle, taskDescription, taskStatus);
+            document.getElementById("taskTitleDoing").value = '';
+            document.getElementById("taskDescriptionDoing").value = '';
+
+            fetchAndRenderTasks();
+            console.log('Task created');
+        } catch (error) {
+            console.error('Error creating task:', error.message);
+        }
+    });
+});
+
+
+// Done create task
+document.addEventListener('DOMContentLoaded', () => {
+    const formDone = document.getElementById('taskFormDone');
+
+    formDone.addEventListener('submit', async (event) => {
+        event.preventDefault();     
+
+        const taskTitle = document.getElementById('taskTitleDone').value;
+        const taskDescription = document.getElementById('taskDescriptionDone').value;
+        const taskStatus = formDone.dataset.status;
+
+        try {
+            const createdTask = await createTask(taskTitle, taskDescription, taskStatus);
+            document.getElementById("taskTitleDone").value = '';
+            document.getElementById("taskDescriptionDone").value = '';
+
+            fetchAndRenderTasks();
+            console.log('Task created');
+        } catch (error) {
+            console.error('Error creating task:', error.message);
+        }
+    });
+});
+

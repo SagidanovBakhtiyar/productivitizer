@@ -55,3 +55,6 @@ async function fetchAndRenderTasks() {
         console.error('Error fetching tasks:', error.message);
     }
 }
+
+// Call the render tasks function to instanly update the page when loaded
+fetchAndRenderTasks();

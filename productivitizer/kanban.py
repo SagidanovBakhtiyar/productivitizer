@@ -77,8 +77,6 @@ def read_task():
     return jsonify(task_list)
 
 
-
-
 # Endpoint for update selected task
 @bp.route("/kanban/update/<int:task_id>", methods=["PUT"])
 @login_required
