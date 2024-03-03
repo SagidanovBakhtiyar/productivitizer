@@ -58,3 +58,37 @@ async function fetchAndRenderTasks() {
 
 // Call the render tasks function to instanly update the page when loaded
 fetchAndRenderTasks();
+
+
+// Function to update task
+async function updateTask(taskId, taskTitle, taskDescription = null, taskStatus) {
+    try {
+        // Prepairing the request body for backend
+        const request = JSON.stringify({
+            task_title: taskTitle,
+            task_description: taskDescription,
+            task_status: taskStatus
+        });
+
+        // Sending put request to backend
+        const response = await fetch(`/kanban/update/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            body: request
+        });
+
+        // Checking the response 
+        if (!response.ok) {
+            throw new Error('Failed to update task');
+        }
+
+        // Return response from backend
+        return response.json();
+    } catch (error) {
+        console.error('Error updating the task: ', error.message);
+        throw error;
+    }
+}

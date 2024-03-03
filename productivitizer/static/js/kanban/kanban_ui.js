@@ -1,4 +1,3 @@
-// Function to update the UI with the fetched tasks
 function updateUITasks(tasks) {
     // Clear existing tasks in each column
     document.getElementById('taskTodo').innerHTML = '';
@@ -9,14 +8,19 @@ function updateUITasks(tasks) {
     tasks.forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.classList.add('task', 'card', 'mb-3');
+        taskElement.dataset.taskId = task.id;
+
         taskElement.innerHTML = `
             <div class="card-body">
                 <p>Task: ${task.task_title}</p>
                 <p>Description: ${task.task_description}</p>
+                <a href="#" class="update-task-btn">
+                    <img src="/static/refresh.png" alt="Update Task" class="update-icon">
+                </a>
             </div>
         `;
 
-        // Determine which column the task belongs to based on its status
+        // Append the task element to the appropriate column
         let column;
         switch (task.task_status) {
             case 'todo':
@@ -32,12 +36,30 @@ function updateUITasks(tasks) {
                 column = null;
         }
 
-        // Append the task element to the appropriate column
+        // Append the task element to the column
         if (column) {
             column.appendChild(taskElement);
         }
+
+        // Add event listener to the update button
+        taskElement.querySelector('.update-task-btn').addEventListener('click', async (event) => {   
+            event.preventDefault();
+
+            try {
+                // Prompt the user for updated task details
+                const updatedTitle = prompt('Enter updated task title:', task.task_title);
+                const updatedDescription = prompt('Enter updated task description:', task.task_description);
+
+                // Call the updateTask function with updated details
+                await updateTask(task.id, updatedTitle, updatedDescription, task.task_status);
+
+            } catch (error) {
+                console.error('Error updating task: ', error);
+            }
+        });
     });
 }
+
 
 
 // Deprecated.
@@ -123,3 +145,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// Update task button UI
