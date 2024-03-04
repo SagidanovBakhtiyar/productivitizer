@@ -1,3 +1,8 @@
+// Call the render tasks function to instanly update the page when loaded
+fetchAndRenderTasks();
+
+
+// UpdateUI calls in fetchAndRender task function. Tasks represents all tasks of user
 function updateUITasks(tasks) {
     // Clear existing tasks in each column
     document.getElementById('taskTodo').innerHTML = '';
@@ -16,6 +21,9 @@ function updateUITasks(tasks) {
                 <p>Description: ${task.task_description}</p>
                 <a href="#" class="update-task-btn">
                     <img src="/static/refresh.png" alt="Update Task" class="update-icon">
+                </a>
+                <a href="#" class="delete-task-btn">
+                    <img src="/static/delete.png" alt="Delete task" class="delete-icon">
                 </a>
             </div>
         `;
@@ -41,7 +49,7 @@ function updateUITasks(tasks) {
             column.appendChild(taskElement);
         }
 
-        // Add event listener to the update button
+        // Update task button functionality
         taskElement.querySelector('.update-task-btn').addEventListener('click', async (event) => {   
             event.preventDefault();
 
@@ -52,9 +60,26 @@ function updateUITasks(tasks) {
 
                 // Call the updateTask function with updated details
                 await updateTask(task.id, updatedTitle, updatedDescription, task.task_status);
+                fetchAndRenderTasks();
 
             } catch (error) {
                 console.error('Error updating task: ', error);
+            }
+        });
+
+
+        // Delete task button functionality
+        taskElement.querySelector('.delete-task-btn').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            try {
+
+                // Call the delete task that user selected
+                await deleteTask(task.id);
+                fetchAndRenderTasks();
+                
+            } catch (error) {
+                console.error('Error deleting task:', error);
             }
         });
     });
@@ -144,6 +169,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-
-// Update task button UI

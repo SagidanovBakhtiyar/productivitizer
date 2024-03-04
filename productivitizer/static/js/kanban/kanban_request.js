@@ -27,7 +27,7 @@ async function createTask(taskTitle, taskDescription = null, taskStatus) {
         return response.json();
 
     } catch (error) {
-        console.error('Error creating the task:', error.message);
+        console.error(error.message);
     } 
 }
 
@@ -52,12 +52,9 @@ async function fetchAndRenderTasks() {
         // Update the UI with the fetched tasks
         updateUITasks(tasks);
     } catch (error) {
-        console.error('Error fetching tasks:', error.message);
+        console.error(error.message);
     }
 }
-
-// Call the render tasks function to instanly update the page when loaded
-fetchAndRenderTasks();
 
 
 // Function to update task
@@ -88,7 +85,29 @@ async function updateTask(taskId, taskTitle, taskDescription = null, taskStatus)
         // Return response from backend
         return response.json();
     } catch (error) {
-        console.error('Error updating the task: ', error.message);
+        console.error(error.message);
         throw error;
+    }
+}
+
+
+// Function to delete tasks from board
+async function deleteTask(taskId) {
+    try {
+        // Delete request to backend
+        const response = await fetch(`/kanban/delete/${taskId}`, {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        });
+
+
+        if (!response.ok) {
+            throw new Error('Failed to delete task');
+        }
+
+        return response.json();
+
+    } catch (error) {
+        console.error(error.message);
     }
 }
