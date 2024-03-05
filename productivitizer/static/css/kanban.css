@@ -8,23 +8,26 @@
         flex-direction: column;
     }
 
-    /* Increase spacing between tasks on mobile */
-    .card-body {
-        margin-bottom: 10px;
+    /* Make card body responsive */
+    .card {
+        width: 100%;
     }
 
-    /* Increase font size for better readability */
-    .form-control {
-        font-size: 16px;
+    /* Ensure consistent width for all columns */
+    .card-body {
+        width: 100%;
+        min-width: 200px;
     }
 }
 
 /* Overall style */
 .card-header {
     user-select: none;
+    width: 100%;
 }
 
 .delete-task-btn, .update-task-btn {
     user-select: none;
     text-decoration: none;
+    width: 100%;
 }
