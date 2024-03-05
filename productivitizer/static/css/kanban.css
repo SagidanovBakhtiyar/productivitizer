@@ -23,3 +23,8 @@
 .card-header {
     user-select: none;
 }
+
+.delete-task-btn, .update-task-btn {
+    user-select: none;
+    text-decoration: none;
+}

@@ -1,7 +1,6 @@
 // Call the render tasks function to instanly update the page when loaded
 fetchAndRenderTasks();
 
-
 // UpdateUI calls in fetchAndRender task function. Tasks represents all tasks of user
 function updateUITasks(tasks) {
     // Clear existing tasks in each column
@@ -14,17 +13,30 @@ function updateUITasks(tasks) {
         const taskElement = document.createElement('div');
         taskElement.classList.add('task', 'card', 'mb-3');
         taskElement.dataset.taskId = task.id;
-
         taskElement.innerHTML = `
             <div class="card-body">
                 <p>Task: ${task.task_title}</p>
                 <p>Description: ${task.task_description}</p>
-                <a href="#" class="update-task-btn">
-                    <img src="/static/refresh.png" alt="Update Task" class="update-icon">
-                </a>
-                <a href="#" class="delete-task-btn">
-                    <img src="/static/delete.png" alt="Delete task" class="delete-icon">
-                </a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="#" class="update-task-btn">
+                            <img src="/static/refresh.png" alt="Update Task" class="update-icon">
+                        </a>
+                        <a href="#" class="delete-task-btn">
+                            <img src="/static/delete.png" alt="Delete task" class="delete-icon">
+                        </a>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Status
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-status="todo">Todo</a></li>
+                            <li><a class="dropdown-item" href="#" data-status="doing">Doing</a></li>
+                            <li><a class="dropdown-item" href="#" data-status="done">Done</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         `;
 
@@ -67,13 +79,11 @@ function updateUITasks(tasks) {
             }
         });
 
-
         // Delete task button functionality
         taskElement.querySelector('.delete-task-btn').addEventListener('click', async (event) => {
             event.preventDefault();
 
             try {
-
                 // Call the delete task that user selected
                 await deleteTask(task.id);
                 fetchAndRenderTasks();
@@ -81,6 +91,19 @@ function updateUITasks(tasks) {
             } catch (error) {
                 console.error('Error deleting task:', error);
             }
+        });
+
+        // Dropdown menu item functionality
+        const dropdownItems = taskElement.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const newStatus = item.dataset.status;
+                
+                // Call the updateTask function with updated status
+                await updateTask(task.id, task.task_title, task.task_description, newStatus);
+                fetchAndRenderTasks();
+            });
         });
     });
 }

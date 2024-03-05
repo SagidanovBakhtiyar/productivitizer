@@ -54,8 +54,7 @@ async function fetchAndRenderTasks() {
     } catch (error) {
         console.error(error.message);
     }
-}
-
+}  
 
 // Function to update task
 async function updateTask(taskId, taskTitle, taskDescription = null, taskStatus) {
