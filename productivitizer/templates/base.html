@@ -28,7 +28,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link {% if 'pomodoro' in request.path %}active{% endif %}" href="{{ url_for('pomodoro.pomodoro') }}">Pomodoro</a>
                     <a class="nav-link {% if 'kanban' in request.path %}active{% endif %}" href="{{ url_for('kanban.kanban') }}">Kanban</a>
-                    <a class="nav-link {% if 'finance' in request.path %}active{% endif %}" href="#">Finance Tracker</a>
+                    <a class="nav-link {% if 'finance' in request.path %}active{% endif %}" href="{{ url_for('finance.finance') }}">Finance Tracker</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     {% if g.user %}

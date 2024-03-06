@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/finance/finance.css') }}">
+{% endblock %}
+
+{% block title %}
+    Finance tracker
+{% endblock %}
+
+{% block main %}
+Hi
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/finance/finance.js') }}"></script>
+{% endblock %}

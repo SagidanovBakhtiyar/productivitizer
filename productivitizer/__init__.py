@@ -55,4 +55,9 @@ def create_app(test_config=None):
     from . import kanban
     app.register_blueprint(kanban.bp)
 
+    
+    # Import finance blueprint
+    from . import finance
+    app.register_blueprint(finance.bp)
+
     return app
