@@ -29,5 +29,6 @@ CREATE TABLE expense (
     expense_title TEXT NOT NULL,
     expense_description TEXT,
     amount INTEGER NOT NULL,
+    expense_date DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
