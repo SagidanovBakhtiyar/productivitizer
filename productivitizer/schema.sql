@@ -26,7 +26,7 @@ CREATE TABLE kanban (
 CREATE TABLE expense (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    expense_type INTEGER NOT NULL,
+    expense_title TEXT NOT NULL,
     expense_description TEXT,
     amount INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user (id)
