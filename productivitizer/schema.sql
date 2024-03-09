@@ -26,9 +26,9 @@ CREATE TABLE kanban (
 CREATE TABLE expense (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    expense_title TEXT NOT NULL,
-    expense_description TEXT,
-    amount INTEGER NOT NULL,
-    expense_date DATE NOT NULL,
+    expense_title TEXT NOT NULL CHECK (LENGTH(expense_title) <= 20),
+    expense_description TEXT CHECK (LENGTH(expense_description) <= 40),
+    amount INTEGER NOT NULL CHECK (amount >= 0 AND amount <= 999999), 
+    expense_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user (id)
 );

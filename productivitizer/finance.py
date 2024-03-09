@@ -31,17 +31,17 @@ def create_expense():
     expense_title = data.get("expense_title")
     expense_description = data.get("expense_description")
     amount = data.get("amount")
-    expense_date = data.get("expense_date")
+
 
     # Validate user input
-    if not expense_title and amount <= 0 and not expense_date:
+    if not expense_title or not amount:
         return jsonify({"error": "Expense title and amount required"}), 400
     
     # Insert new expense into database
     db = get_db()
     db.execute(
-        "INSERT INTO expense (user_id, expense_title, expense_description, amount, expense_date) VALUES (?, ?, ?, ?)",
-        (g.user["id"], expense_title, expense_description, amount, expense_date),
+        "INSERT INTO expense (user_id, expense_title, expense_description, amount) VALUES (?, ?, ?, ?)",
+        (g.user["id"], expense_title, expense_description, amount),
     )
     db.commit()
 
@@ -60,11 +60,16 @@ def read_expense():
         "SELECT * FROM expense WHERE user_id = ?", (g.user["id"],)
     ).fetchall()
 
+    total = db.execute(
+        "SELECT SUM(amount) as total FROM expense WHERE user_id = ?",
+        (g.user["id"],)
+    ).fetchone()
+
     # Validate empty expense
     if not expenses:
-        return jsonify([])
-    
-    # Converting the tasks
+        return jsonify({"expenses": [], "total": 0})  # Return an empty list and total of 0 if there are no expenses
+
+    # Convert expenses to list of dictionaries
     expense_list = []
     for expense in expenses:
         expense_dict = {
@@ -76,7 +81,9 @@ def read_expense():
         }
         expense_list.append(expense_dict)
 
-    return jsonify(expense_list)
+    # Return expenses list and total as JSON
+    return jsonify({"expenses": expense_list, "total": total["total"]})
+
 
 
 # Endpont to delete expense
