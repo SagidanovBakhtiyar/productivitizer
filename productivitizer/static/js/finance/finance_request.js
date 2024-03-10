@@ -50,8 +50,55 @@ async function fetchExpenses() {
         const expenses = responseData.expenses;
         const total = responseData.total;
 
+        // Call ui functions
         updateUI(expenses, total);
+        drawPieChart(expenses);
     } catch (error) {
         console.error(error.message);
     }
+}
+
+
+// Function to delete individual expenses
+async function deleteExpense(expenseId) {
+    try {
+        // Delete request to backend
+        const response = await fetch(`/finance/delete/${expenseId}`, {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        });
+
+
+        if (!response.ok) {
+            throw new Error('Failed to delete task');
+        }
+
+        return response.json();
+
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+
+// Function to clear expenses
+function clearExpenses() {
+    fetch('/finance/clear', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Expenses cleared successfully');
+            // Update page
+            fetchExpenses();
+        } else {
+            console.error('Failed to clear expenses');
+        }
+    })
+    .catch(error => {
+        console.error('Error clearing expenses: ', error);
+    });
 }

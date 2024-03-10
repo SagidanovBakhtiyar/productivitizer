@@ -16,6 +16,9 @@ function updateUI(expenses, total) {
                 <td class="text-center">${expense.expense_description}</td>
                 <td class="text-center">${expense.amount}</td>
                 <td class="text-center">${expense.expense_date}</td>
+                <td class="text-center"><a href="#" class="delete-expense-btn">
+                <img src="/static/delete.png" alt="Delete task" class="delete-icon">
+                </a></td>
             `;
             expenseList.appendChild(row);
         });
@@ -32,4 +35,13 @@ document.getElementById('expenseForm').addEventListener('submit', function(event
     event.preventDefault(); // Prevent default form submission
     addExpense(); // Call addExpense function
 });
+
+
+// Add event listener to the "Clear Expenses" button for click event
+document.getElementById('clearExpenses').addEventListener('click', function(event) {
+    event.preventDefault();
+    clearExpenses();
+});
+
+
 

@@ -112,3 +112,19 @@ def delete_expense(expense_id):
     db.commit()
 
     return jsonify({"message": "Expense deleted successfully"}), 200
+
+
+# Endpoint to clear all expenses
+@bp.route("/finance/clear", methods=["DELETE"])
+@login_required
+def clear_expense():
+
+    db = get_db()
+
+    db.execute(
+        "DELETE FROM expense WHERE user_id = ?",
+        (g.user["id"],)
+    )
+    db.commit()
+
+    return jsonify({"message": "All expenses deleted successfully"}), 200
