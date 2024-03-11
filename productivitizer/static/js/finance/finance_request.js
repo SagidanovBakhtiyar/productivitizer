@@ -54,6 +54,7 @@ async function fetchExpenses() {
 
         // Call ui functions
         updateUI(expenses, total);
+        drawPieChart(expenses);
     } catch (error) {
         console.error(error.message);
     }

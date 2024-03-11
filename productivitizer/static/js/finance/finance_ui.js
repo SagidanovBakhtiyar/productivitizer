@@ -29,6 +29,7 @@ function updateUI(expenses, total) {
             deleteButton.addEventListener('click', () => {
                 const expenseId = deleteButton.getAttribute('data-expense-id');
                 deleteExpense(expenseId);
+                fetchExpenses();
             });
         });
     }
@@ -45,6 +46,7 @@ function updateUI(expenses, total) {
 document.getElementById('expenseForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
     addExpense(); // Call addExpense function
+    fetchExpenses();
 });
 
 
@@ -52,6 +54,7 @@ document.getElementById('expenseForm').addEventListener('submit', function(event
 document.getElementById('clearExpenses').addEventListener('click', function(event) {
     event.preventDefault();
     clearExpenses();
+    fetchExpenses();
 });
 
 
