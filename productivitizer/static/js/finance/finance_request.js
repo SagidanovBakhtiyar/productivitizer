@@ -23,6 +23,8 @@ async function addExpense() {
             throw new Error('Failed to add expense');
         }
 
+        expenseForm.reset();
+
         // Refresh the expenses list after adding
         fetchExpenses();
     } catch (error) {
@@ -52,7 +54,6 @@ async function fetchExpenses() {
 
         // Call ui functions
         updateUI(expenses, total);
-        drawPieChart(expenses);
     } catch (error) {
         console.error(error.message);
     }
@@ -73,6 +74,7 @@ async function deleteExpense(expenseId) {
             throw new Error('Failed to delete task');
         }
 
+        fetchExpenses();
         return response.json();
 
     } catch (error) {

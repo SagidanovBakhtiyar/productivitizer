@@ -1,13 +1,13 @@
 // Call the fetchExpenses function to instanly update the page when loaded
 fetchExpenses();
 
-// Update UI 
+// Update the UI to display expenses and total amount
 function updateUI(expenses, total) {
     const expenseList = document.getElementById('expenseList');
     expenseList.innerHTML = ''; // Clear previous content
 
     if (expenses.length === 0) {
-        expenseList.innerHTML = '<tr><td colspan="4" class="text-center">No expenses found.</td></tr>';
+        expenseList.innerHTML = '<tr><td colspan="5" class="text-center">No expenses</td></tr>';
     } else {
         expenses.forEach(expense => {
             const row = document.createElement('tr');
@@ -16,16 +16,27 @@ function updateUI(expenses, total) {
                 <td class="text-center">${expense.expense_description}</td>
                 <td class="text-center">${expense.amount}</td>
                 <td class="text-center">${expense.expense_date}</td>
-                <td class="text-center"><a href="#" class="delete-expense-btn">
-                <img src="/static/delete.png" alt="Delete task" class="delete-icon">
-                </a></td>
+                <td class="text-center">
+                    <button class="delete-expense-btn" data-expense-id="${expense.id}">
+                        <img src="/static/delete.png" alt="Delete task" class="delete-icon">
+                    </button>
+                </td>
             `;
             expenseList.appendChild(row);
+
+            // Attach event listener to delete button
+            const deleteButton = row.querySelector('.delete-expense-btn');
+            deleteButton.addEventListener('click', () => {
+                const expenseId = deleteButton.getAttribute('data-expense-id');
+                deleteExpense(expenseId);
+            });
         });
     }
     
     // Populate total amount
     document.getElementById('totalAmount').textContent = total;
+
+    drawPieChart(expenses);
 }
 
 

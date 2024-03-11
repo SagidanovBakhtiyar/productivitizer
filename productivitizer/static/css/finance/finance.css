@@ -1,39 +1,43 @@
-/* Styles for the container-chart */
 .container-chart {
-    margin-top: 20px;
-    margin-bottom: 50px;
     text-align: center;
 }
 
-/* Styles for the canvas element */
 canvas#pie-chart {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
 }
 
-/* Styles for the container */
 .container {
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
-/* Styles for the form */
 #expenseForm {
     margin-bottom: 20px;
 }
 
-/* Styles for the table */
 .table {
     margin-top: 20px;
 }
 
-/* Styles for table headers */
 .table thead th {
     text-align: center;
 }
 
-/* Styles for table footer */
 .table tfoot td {
     text-align: center;
     font-weight: bold;
 }
+
+.delete-expense-btn {
+    text-decoration: none;
+    border: none;
+    background: none; 
+    cursor: pointer; 
+}
+
+/* Style the delete icon */
+.delete-icon {
+    width: 32px;
+}
+
