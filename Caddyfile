@@ -1,5 +1,5 @@
 www.productivitizer.com {
-    redir http://productivitizer.com{uri}
+    redir https://productivitizer.com{uri}
 }
 
 
