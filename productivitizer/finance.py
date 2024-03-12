@@ -3,7 +3,7 @@ from productivitizer.auth import login_required
 from productivitizer.db import get_db
 
 
-bp = Blueprint('finance', __name__)
+bp = Blueprint("finance", __name__)
 
 
 # Finance tracker api
@@ -13,6 +13,7 @@ read_expense - GET,
 delete_expense - DELETE,
 
 """
+
 
 # Endpoint for webpage view
 @bp.route("/finance")
@@ -32,11 +33,10 @@ def create_expense():
     expense_description = data.get("expense_description")
     amount = data.get("amount")
 
-
     # Validate user input
     if not expense_title or not amount:
         return jsonify({"error": "Expense title and amount required"}), 400
-    
+
     # Insert new expense into database
     db = get_db()
     db.execute(
@@ -61,13 +61,14 @@ def read_expense():
     ).fetchall()
 
     total = db.execute(
-        "SELECT SUM(amount) as total FROM expense WHERE user_id = ?",
-        (g.user["id"],)
+        "SELECT SUM(amount) as total FROM expense WHERE user_id = ?", (g.user["id"],)
     ).fetchone()
 
     # Validate empty expense
     if not expenses:
-        return jsonify({"expenses": [], "total": 0})  # Return an empty list and total of 0 if there are no expenses
+        return jsonify(
+            {"expenses": [], "total": 0}
+        )  # Return an empty list and total of 0 if there are no expenses
 
     # Convert expenses to list of dictionaries
     expense_list = []
@@ -77,13 +78,12 @@ def read_expense():
             "expense_title": expense["expense_title"],
             "expense_description": expense["expense_description"],
             "amount": expense["amount"],
-            "expense_date": expense["expense_date"]
+            "expense_date": expense["expense_date"],
         }
         expense_list.append(expense_dict)
 
     # Return expenses list and total as JSON
     return jsonify({"expenses": expense_list, "total": total["total"]})
-
 
 
 # Endpont to delete expense
@@ -100,12 +100,15 @@ def delete_expense(expense_id):
     # Check if the expense exists
     if not expense:
         return jsonify({"error": "Expense not found"}), 404
-    
+
     # Verify user permission
     if expense["user_id"] != g.user["id"]:
-        return jsonify({"error": "You do not have permission to delete this expense"}), 403
-    
-    # Delete expense 
+        return (
+            jsonify({"error": "You do not have permission to delete this expense"}),
+            403,
+        )
+
+    # Delete expense
     db.execute(
         "DELETE FROM expense WHERE id = ? AND user_id = ?", (expense_id, g.user["id"])
     )
@@ -121,10 +124,7 @@ def clear_expense():
 
     db = get_db()
 
-    db.execute(
-        "DELETE FROM expense WHERE user_id = ?",
-        (g.user["id"],)
-    )
+    db.execute("DELETE FROM expense WHERE user_id = ?", (g.user["id"],))
     db.commit()
 
     return jsonify({"message": "All expenses deleted successfully"}), 200

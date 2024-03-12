@@ -14,6 +14,7 @@ delete_task - DELETE,
 
 """
 
+
 # Endpoint for webpage view
 @bp.route("/kanban")
 @login_required
@@ -31,7 +32,6 @@ def create_task():
     task_title = data.get("task_title")
     task_description = data.get("task_description")
     task_status = data.get("task_status")
-    
 
     # Validate the user request
     if not task_title:
@@ -71,10 +71,10 @@ def read_task():
             "id": task["id"],
             "task_title": task["task_title"],
             "task_description": task["task_description"],
-            "task_status": task["task_status"]
+            "task_status": task["task_status"],
         }
         task_list.append(task_dict)
-    
+
     return jsonify(task_list)
 
 
@@ -104,7 +104,7 @@ def update_task(task_id):
 @bp.route("/kanban/delete/<int:task_id>", methods=["DELETE"])
 @login_required
 def delete_task(task_id):
-    
+
     # Get the task from the database
     db = get_db()
     task = db.execute(
