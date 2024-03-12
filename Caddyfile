@@ -1,8 +1,13 @@
 www.productivitizer.com {
     redir https://productivitizer.com{uri}
+    tls /etc/ssl/certificate.crt /etc/ssl/private/private.key {
+        ca /etc/ssl/ca_bundle.crt
+    }
 }
-
 
 productivitizer.com {
     reverse_proxy localhost:8000
+    tls /etc/ssl/certificate.crt /etc/ssl/private/private.key {
+        ca /etc/ssl/ca_bundle.crt
+    }
 }
