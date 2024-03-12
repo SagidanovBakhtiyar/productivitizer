@@ -36,7 +36,8 @@ function updateUI(expenses, total) {
     
     // Populate total amount
     document.getElementById('totalAmount').textContent = total;
-
+    
+    // Draw user expenses chart
     drawPieChart(expenses);
 }
 
