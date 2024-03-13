@@ -1,7 +1,0 @@
-www.productivitizer.com {
-    redir https://productivitizer.com{uri}
-}
-
-productivitizer.com {
-    reverse_proxy localhost:8000
-}
