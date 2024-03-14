@@ -1,1 +1,1 @@
-# productivitizer
+![productivitizer logo](img/productivitizer.png)
