@@ -52,7 +52,7 @@ The application is deployed using Gunicorn and Nginx on a virtual private server
 
 1. Clone the repository: `git clone https://github.com/slackerkids/productivitizer.git`
 2. Install dependencies: `pip install -r requirements.txt`
-3. Set up the database: `flask db init`
+3. Set up the database: `flask --app productivitizer init-db`
 4. If you want to deploy it in production server you need to create `config.py` on instance folder. More: `https://flask.palletsprojects.com/en/3.0.x/tutorial/deploy/`
 5. Run the application locally: `flask --app productivitizer run`
 
