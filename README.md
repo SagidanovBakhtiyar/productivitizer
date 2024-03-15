@@ -65,6 +65,12 @@ The application is deployed using Gunicorn and Nginx on a virtual private server
 
  You're welcome for contributions to improve Productivitizer. Fork the repository and submit pull requests with your changes or enhancements.
 
+## Links
+
+Video demo: `https://youtu.be/BWXWdkZseDk`
+Website URL: `https://www.productivitizer.com/`
+My LinkedIn: `https://www.linkedin.com/in/bakhtiyar-sagidanov`
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
