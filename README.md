@@ -67,9 +67,9 @@ The application is deployed using Gunicorn and Nginx on a virtual private server
 
 ## Links
 
-Video demo: `https://youtu.be/BWXWdkZseDk`
-Website URL: `https://www.productivitizer.com/`
-My LinkedIn: `https://www.linkedin.com/in/bakhtiyar-sagidanov`
+- Video demo: `https://youtu.be/BWXWdkZseDk`
+- Website URL: `https://www.productivitizer.com/`
+- My LinkedIn: `https://www.linkedin.com/in/bakhtiyar-sagidanov`
 
 ## License
 
